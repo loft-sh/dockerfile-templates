@@ -2,4 +2,3 @@ container:
   image: ""
   pullSecrets: 
   - "devspace-image-pull"
-  port: 3000
