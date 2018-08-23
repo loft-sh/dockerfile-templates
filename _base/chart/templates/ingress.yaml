@@ -1,5 +1,4 @@
-{{- if .Values.external.domain -}}
-{{- if .Values.external.port -}}
+{{- if (.Values.external) and (.Values.external.domain) and .Values.external.port -}}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -17,5 +16,4 @@ spec:
         backend:
           serviceName: {{ .Release.Name }}
           servicePort: {{ .Values.external.port }}
-{{- end -}}
 {{- end -}}

@@ -1,5 +1,5 @@
-{{- if .Values.container.port -}}
-{{- if .Values.external.port -}}
+{{- if (.Values.container) and .Values.container.port -}}
+{{- if (.Values.external) and .Values.external.port -}}
 apiVersion: v1
 kind: Service
 metadata:
