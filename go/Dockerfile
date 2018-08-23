@@ -6,10 +6,9 @@ ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 RUN mkdir -p "$GOPATH" "$GOPATH/src" "$GOPATH/src/app" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 WORKDIR $GOPATH
 
-ADD . $GOPATH/src
+ADD . $GOPATH/src/app
 WORKDIR $GOPATH
 
-RUN go get ./...
-RUN go build -o main .
+RUN cd $GOPATH/src/app && go get ./... && go build -o main .
 
 CMD ["$GOPATH/src/app/main"]
