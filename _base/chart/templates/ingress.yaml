@@ -5,6 +5,8 @@ metadata:
   name: {{ .Release.Name }}
   labels:
     release: "{{ .Release.Name }}"
+    chartName: "{{ .Chart.Name }}"
+    chartVersion: "{{ .Chart.Version }}"
 spec:
   rules:
   - host: {{ .Values.external.domain }}
@@ -12,6 +14,6 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: {{ .Release.Name }}
+          serviceName: "{{ .Release.Name }}-{{ .Release.Revision }}"
           servicePort: {{ .Values.external.port }}
 {{- end -}}

@@ -4,12 +4,26 @@ metadata:
   name: {{ .Release.Name }}
   labels:
     release: "{{ .Release.Name }}"
+    chartName: "{{ .Chart.Name }}"
+    chartVersion: "{{ .Chart.Version }}"
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      release: "{{ .Release.Name }}"
+      revision: "{{ .Release.Revision }}"
+      chartName: "{{ .Chart.Name }}"
+      chartVersion: "{{ .Chart.Version }}"
   template:
     metadata:
       labels:
         release: "{{ .Release.Name }}"
+<<<<<<< HEAD
+=======
+        revision: "{{ .Release.Revision }}"
+        chartName: "{{ .Chart.Name }}"
+        chartVersion: "{{ .Chart.Version }}"
+>>>>>>> 2e36905ebda8148e6e74cbdf9be7ac59bed6cf38
     spec:
       imagePullSecrets:
       {{- range $index, $secretName := .Values.container.pullSecrets }}
