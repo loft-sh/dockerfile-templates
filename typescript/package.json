@@ -1,0 +1,18 @@
+{
+  "name": "my-app",
+  "version": "0.0.1",
+  "description": "my js app",
+  "author": "YOUR NAME <you@company>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node dist/index.js",
+    "develop": "ts-node src/index.js",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "typescript": "3.0.3"
+  },
+  "devDependencies": {
+    "ts-node": "7.0.1"
+  }
+}
