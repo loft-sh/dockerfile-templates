@@ -23,7 +23,7 @@ spec:
         chartVersion: "{{ .Chart.Version }}"
     spec:
       imagePullSecrets:
-      {{- range $index, $secretName := .Values.container.pullSecrets }}
+      {{- range $index, $secretName := .Values.pullSecrets }}
       - name: "{{ $secretName }}"
       {{- end }}
       containers:
