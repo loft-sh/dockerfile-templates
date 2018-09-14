@@ -1,5 +1,5 @@
-container:
-  image: ""
-  pullSecrets: 
-  - "devspace-image-pull"
-  port: 3000
+containers:
+  default:
+    image: ""
+    pullSecrets: 
+    - "devspace-image-pull"
