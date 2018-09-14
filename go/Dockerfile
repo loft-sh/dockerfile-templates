@@ -1,14 +1,9 @@
-FROM golang:1.10
+FROM golang:1.11
 
-ENV GOPATH /app
-ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
-
-RUN mkdir -p "$GOPATH" "$GOPATH/src" "$GOPATH/src/app" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
-WORKDIR $GOPATH
-
+RUN mkdir -p "$GOPATH/src/app" && ln -s $GOPATH/src/app /app
 ADD . $GOPATH/src/app
-WORKDIR $GOPATH
 
-RUN cd $GOPATH/src/app && go get ./... && go build -o main .
+RUN cd $GOPATH/src/app && go get ./... && go build .
 
+WORKDIR /app
 CMD ["$GOPATH/src/app/main"]
