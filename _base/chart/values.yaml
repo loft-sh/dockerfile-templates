@@ -1,5 +1,6 @@
 containers:
   default:
     image: ""
-    pullSecrets: 
-    - "devspace-image-pull"
+
+pullSecrets: 
+- "devspace-image-pull"
