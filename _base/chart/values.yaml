@@ -2,5 +2,4 @@ containers:
   default:
     image: ""
 
-pullSecrets: 
-- "devspace-image-pull"
+pullSecrets: []
