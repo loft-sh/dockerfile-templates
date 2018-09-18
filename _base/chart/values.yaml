@@ -1,5 +1,9 @@
 containers:
   default:
     image: ""
+    command: 
+    - sleep
+    args:
+    - 99999999
 
 pullSecrets: []
