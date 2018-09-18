@@ -1,6 +1,6 @@
 containers:
   default:
-    image: ""
+    image: "will be overriden by devspace up"
     command: 
     - sleep
     args:
