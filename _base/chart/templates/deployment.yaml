@@ -24,6 +24,11 @@ spec:
           {{- range $index, $arg := .Values.containers.default.args }}
           - "{{ $arg }}"
           {{- end }}
+        resources:
+          limits:
+            memory: 768Mi
+          requests:
+            memory: "0"
       imagePullSecrets:
         {{- range $index, $secretName := .Values.pullSecrets }}
         - name: "{{ $secretName }}"
