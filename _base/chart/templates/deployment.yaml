@@ -26,9 +26,8 @@ spec:
           {{- end }}
         resources:
           limits:
+            cpu: 700m
             memory: 768Mi
-          requests:
-            memory: "0"
       imagePullSecrets:
         {{- range $index, $secretName := .Values.pullSecrets }}
         - name: "{{ $secretName }}"
