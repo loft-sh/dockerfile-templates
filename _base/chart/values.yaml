@@ -1,9 +1,5 @@
 containers:
   default:
-    image: "will be overriden by devspace up"
-    command: 
-    - sleep
-    args:
-    - 99999999
+    image: "use this for devspace deploy, will be overwritten by devspace up"
 
 pullSecrets: []
