@@ -8,8 +8,8 @@ metadata:
     chartVersion: "{{ .Chart.Version }}"
 spec:
   ports:
-    - port: 80
-      protocol: TCP
-      targetPort: 3000
-    selector:
-      release: "{{ .Release.Name }}"
+  - port: 80
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    release: "{{ .Release.Name }}"
