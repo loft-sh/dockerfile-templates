@@ -13,6 +13,7 @@ spec:
       labels:
         release: "{{ .Release.Name }}"
     spec:
+      terminationGracePeriodSeconds: 5
       containers:
       - name: default
         image: "{{ .Values.containers.default.image }}"
