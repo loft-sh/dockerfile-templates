@@ -12,6 +12,8 @@ spec:
         revision: "{{ .Release.Revision }}"
       labels:
         release: "{{ .Release.Name }}"
+        chart: "{{ .Chart.Name }}"
+        devspace: "default"
     spec:
       terminationGracePeriodSeconds: 5
       containers:
