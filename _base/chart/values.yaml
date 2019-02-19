@@ -1,43 +1,30 @@
 components:
 - name: default
-  replicas: 1
   containers:
-  - name: default
-    image: nginx
-    command: []
-    args: []
+  - # Image tag will be automatically updated in runtime
+    # when running devspace deploy or devspace dev
+    image: #image# 
     resources:
       limits:
         cpu: "100m"
         memory: "100Mi"
         ephemeralStorage: "1Gi"
-      requests: {}
-    env:
-    - name: TEST
-      value: "test123"
-    volumeMounts:
-    - containerPath: /usr/share/nginx/html
-      volume:
-        name: nginx
-        path: /nginx/html
-        readOnly: false
+    # Environment variables
+    env: []
+    # Mount volumes in this container
+    volumeMounts: []
+  # Expose your component via service
+  # URLs will be connected if name=external and externalPort=80
   service:
     name: external
     type: ClusterIP
     ports:
     - externalPort: 80
-      containerPort: 80
-    - externalPort: 443
-      containerPort: 80
-  autoScaling:
-    horizontal:
-      maxReplicas: 4
-      averageCPU: 80
-      averageMemory: 200Mi
+      containerPort: #port#
 
-volumes:
-- name: nginx
-  size: "2Gi"
+# Define persistent volumes here
+# Then mount them in containers above
+volumes: []
 
 # Defines image pull secrets
 # DevSpace.cli will append all pull secrets which are automatically created
