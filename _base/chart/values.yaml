@@ -1,5 +1,45 @@
-containers:
-  default:
-    image: "use this for devspace deploy, will be overwritten by devspace up"
+components:
+- name: default
+  replicas: 1
+  containers:
+  - name: default
+    image: nginx
+    command: []
+    args: []
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "100Mi"
+        ephemeralStorage: "1Gi"
+      requests: {}
+    env:
+    - name: TEST
+      value: "test123"
+    volumeMounts:
+    - containerPath: /usr/share/nginx/html
+      volume:
+        name: nginx
+        path: /nginx/html
+        readOnly: false
+  service:
+    name: external
+    type: ClusterIP
+    ports:
+    - externalPort: 80
+      containerPort: 80
+    - externalPort: 443
+      containerPort: 80
+  autoScaling:
+    horizontal:
+      maxReplicas: 4
+      averageCPU: 80
+      averageMemory: 200Mi
 
+volumes:
+- name: nginx
+  size: "2Gi"
+
+# Defines image pull secrets
+# DevSpace.cli will append all pull secrets which are automatically created
+# More infos on: https://devspace.cloud/docs/images/pull-secrets
 pullSecrets: []
