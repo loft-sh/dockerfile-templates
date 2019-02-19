@@ -41,7 +41,11 @@ spec:
         {{- end }}
       containers:
         {{- range $containerIndex, $container := $component.containers }}
+<<<<<<< HEAD
         - name: {{ $container.name | default "container" | quote }}
+=======
+        - name: {{ $container.name | default "container-$containerIndex" | quote }}
+>>>>>>> 097d8b4d98c2951caeca96cc76f41d6ab1345d3f
           image: {{ $container.image | quote }}
           command:
             {{- range $commandIndex, $command := $container.command }}
