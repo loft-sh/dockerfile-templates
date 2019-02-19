@@ -9,6 +9,10 @@ components:
         cpu: "100m"
         memory: "100Mi"
         ephemeralStorage: "1Gi"
+      requests:
+        cpu: "0"
+        memory: "0"
+        ephemeralStorage: "0"
     # Environment variables
     env: []
     # Mount volumes in this container
