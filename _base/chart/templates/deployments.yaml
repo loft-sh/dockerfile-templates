@@ -60,21 +60,26 @@ spec:
               subPath: {{ trimAll "/" $volumeMount.volume.path | default "" | quote }}
               readOnly: {{ $volumeMount.volume.readOnly | default false }}
             {{- end }}
+          {{- if $container.resources }}
           resources:
-            limits:
-            {{- if $container.resources }}
             {{- with $container.resources.limits }}
-              cpu: {{ .cpu | quote }}
-              memory: {{ .memory | quote }}
-              ephemeral-storage: {{ .ephemeralStorage | quote }}
+            limits:
+              cpu: {{ .cpu | default "0" | quote }}
+              memory: {{ .memory | default "0" | quote }}
+              ephemeral-storage: {{ .ephemeralStorage | default "0" | quote }}
             {{- end }}
             {{- if $container.resources.requests }}
             requests:
               cpu: {{ $container.resources.requests.cpu | default "0" | quote }}
               memory: {{ $container.resources.requests.memory | default "0" | quote }}
               ephemeral-storage: {{ $container.resources.requests.ephemeralStorage | default "0" | quote }}
+            {{- else }}
+            requests:
+              cpu: "0"
+              memory: "0"
+              ephemeral-storage: "0"
             {{- end }}
-            {{- end }}
+          {{- end }}
         {{- end }}
       volumes:
         {{- range $volumeIndex, $volume := $.Values.volumes }}
