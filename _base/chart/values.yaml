@@ -1,4 +1,4 @@
-# Components are independently scalable parts of your applications
+# Components are independently scalable parts of your application
 # Components can contain multiple containers which cannot be scaled independently from each other
 components:
 - name: default
