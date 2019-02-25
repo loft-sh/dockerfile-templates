@@ -15,6 +15,7 @@ metadata:
   name: {{ $component.name | quote }}
   labels:
     "app.kubernetes.io/name": {{ $.Release.Name | quote }}
+    "app.kubernetes.io/component": {{ $component.name | quote }}
     "app.kubernetes.io/managed-by": {{ $.Release.Service | quote }}
   annotations:
     "helm.sh/chart": "{{ $.Chart.Name }}-{{ $.Chart.Version }}"
@@ -41,8 +42,12 @@ spec:
         {{- end }}
       containers:
         {{- range $containerIndex, $container := $component.containers }}
-        - name: {{ $container.name | default "container" | quote }}
-          image: {{ $container.image | quote }}
+        - image: {{ $container.image | quote }}
+          {{- if $container.name }}
+          name: {{ $container.name | quote }}
+          {{- else }}
+          name: "container-{{ $containerIndex }}"
+          {{- end }}
           command:
             {{- range $commandIndex, $command := $container.command }}
             - {{ $command | quote }}
@@ -53,6 +58,10 @@ spec:
             {{- end }}
           env:
 {{ toYaml $container.env | indent 12 }}
+          livenessProbe:
+{{ toYaml $container.livenessProbe | indent 12 }}
+          readinessProbe:
+{{ toYaml $container.readinessProbe | indent 12 }}
           volumeMounts:
             {{- range $volumeMountIndex, $volumeMount := $container.volumeMounts }}
             - name: {{ $volumeMount.volume.name | quote }}

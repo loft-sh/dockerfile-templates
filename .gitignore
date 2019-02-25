@@ -1,0 +1,4 @@
+.devspace/
+/_base/Dockerfile
+/_base/package.json
+/_base/index.js
