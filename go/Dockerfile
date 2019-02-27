@@ -6,4 +6,4 @@ ADD . $GOPATH/src/app
 RUN cd $GOPATH/src/app && go get ./... && go build . && cd /app
 
 WORKDIR /app
-CMD ["$GOPATH/src/app/app"]
+CMD ["/go/src/app/app"]
