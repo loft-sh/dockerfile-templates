@@ -8,8 +8,8 @@ components:
     image: #image#
     resources:
       limits:
-        cpu: "100m"
-        memory: "200Mi"
+        cpu: "500m"
+        memory: "400Mi"
         ephemeralStorage: "1Gi"
     # Environment variables
     env: []
