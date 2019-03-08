@@ -5,7 +5,7 @@ apiVersion: apps/v1
   {{- range $volumeMountIndex, $volumeMount := $container.volumeMounts }}
     {{- range $volumeIndex, $volume := $.Values.volumes }}
       {{- if eq $volumeMount.volume.name $volume.name }}
-        {{- $kind = "StatefulSet" -}}
+        {{- $kind := "StatefulSet" -}}
       {{- end -}}
     {{- end -}}
   {{- end }}
