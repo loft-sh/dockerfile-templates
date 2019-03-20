@@ -11,7 +11,4 @@ COPY . .
 # Application port
 EXPOSE 3000
 
-# Remote debugging port
-EXPOSE 9229
-
 CMD ["npm", "start"]
