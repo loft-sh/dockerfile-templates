@@ -5,8 +5,8 @@
   "author": "YOUR NAME <you@company>",
   "license": "MIT",
   "scripts": {
-    "start": "node dist/index.js",
-    "dev": "node --inspect=0.0.0.0:9229 -r ts-node/register src/index.ts",
+    "start": "node --inspect=0.0.0.0:9229 -r ts-node/register src/index.ts",
+    "start-production": "node dist/index.js",
     "build": "tsc"
   },
   "dependencies": {

@@ -5,8 +5,8 @@
   "author": "YOUR NAME <you@company>",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon --inspect=0.0.0.0:9229 index.js"
+    "start": "nodemon --inspect=0.0.0.0:9229 index.js",
+    "start-production": "node index.js"
   },
   "dependencies": {},
   "devDependencies": {

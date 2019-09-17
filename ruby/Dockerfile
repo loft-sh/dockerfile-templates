@@ -2,10 +2,13 @@ FROM ruby
 
 RUN bundle config --global frozen 1
 
-WORKDIR /usr/src/app
+# Create project directory (workdir)
+RUN mkdir /app
+WORKDIR /app
 
-# Copy gemfile into container
-COPY Gemfile Gemfile.lock ./
+# Copy Gemfile and Gemfile.lock to WORKDIR
+COPY Gemfile .
+COPY Gemfile.lock .
 
 # Install dependencies
 RUN bundle install
