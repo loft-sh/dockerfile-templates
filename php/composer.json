@@ -1,0 +1,10 @@
+{
+    "name": "myorg/project",
+    "description": "Some description",
+    "keywords": [],
+    "license": "",
+    "type": "project",
+    "require": {
+        "php": ">=7.0.0"
+    }
+}

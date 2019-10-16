@@ -1,6 +1,4 @@
 Dockerfile
-.devspace/
-chart/
 target/
 work/
 .git/
