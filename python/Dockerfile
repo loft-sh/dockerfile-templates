@@ -1,4 +1,4 @@
-FROM python:3.7-alpine
+FROM python:3.7
 
 # Create project directory (workdir)
 RUN mkdir /app
@@ -14,4 +14,5 @@ COPY . .
 ENTRYPOINT ["python"]
 
 # The script to start on startup
+# YOU PROBABLY NEED TO EDIT THE FOLLOWING LINE
 CMD ["app.py"]
