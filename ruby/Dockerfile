@@ -1,6 +1,7 @@
-FROM ruby
+FROM ruby:2.6-alpine
 
-RUN bundle config --global frozen 1
+# Install important dependencies
+RUN apk add build-base nodejs yarn tzdata sqlite-dev postgresql-client postgresql-dev
 
 # Create project directory (workdir)
 RUN mkdir /app
@@ -16,5 +17,9 @@ RUN bundle install
 # Copy application into container
 COPY . .
 
-# Run application
-CMD ["ruby", "app.rb"]
+# Use the following lines for Rails Apps
+RUN yarn install --check-files
+CMD ["bundle", "exec", "rails", "server", "-p", "3000", "-b", "0.0.0.0"]
+
+# Use the following line for Non-Rails Apps
+# CMD ["ruby", "your-app.rb"]
