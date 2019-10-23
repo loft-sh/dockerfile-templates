@@ -1,10 +1,13 @@
 #!/bin/sh
 set -e
 
-if [ -f /app/tmp/pids/server.pid ]; then
-  rm /app/tmp/pids/server.pid
+if [ -f ./tmp/pids/server.pid ]; then
+  rm ./tmp/pids/server.pid
 fi
 
-bundle exec rake db:migrate 2>/dev/null || bundle exec rake db:setup
+for n in {1..6}; do  
+  (bundle exec rake db:migrate || bundle exec rake db:setup || echo "Database migration/setup failed. Retry in 10s...") && break
+  sleep 10
+done
 
 exec bundle exec "$@"
