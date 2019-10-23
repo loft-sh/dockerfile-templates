@@ -1,7 +1,7 @@
 FROM ruby:2.6-alpine
 
 # Install important dependencies
-RUN apk add build-base nodejs yarn tzdata sqlite-dev postgresql-client postgresql-dev
+RUN apk add build-base nodejs yarn tzdata sqlite-dev postgresql-client postgresql-dev python
 
 # Create project directory (workdir)
 RUN mkdir /app
