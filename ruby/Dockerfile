@@ -19,6 +19,7 @@ COPY . .
 
 # Use the following lines for Rails Apps
 RUN yarn install --check-files && bundle exec rails webpacker:install
+RUN chmod +x ./lib/entrypoint.sh
 ENTRYPOINT ["./lib/entrypoint.sh"]
 CMD ["rails", "server", "-p", "3000", "-b", "0.0.0.0"]
 
