@@ -1,27 +1,42 @@
-FROM ruby:2.6-alpine
+FROM ruby:2.6.4-alpine
 
-# Install important dependencies
-RUN apk add build-base nodejs yarn tzdata sqlite-dev postgresql-client postgresql-dev python
+RUN apk add --update --no-cache \
+    build-base \
+    postgresql-dev \
+    sqlite-dev \
+    git \
+    file \
+    imagemagick \
+    nodejs-current \
+    yarn \
+    tzdata
 
 # Create project directory (workdir)
-RUN mkdir /app
 WORKDIR /app
 
-# Copy Gemfile and Gemfile.lock to WORKDIR
-COPY Gemfile .
-COPY Gemfile.lock .
+# Install gems
+COPY Gemfile* ./
+RUN bundle config --global frozen 1 \
+ && bundle install -j4 --retry 3
 
-# Install dependencies
-RUN bundle install
+# Install yarn packages (optimized version, uncomment if you have package.json and yarn.lock)
+#COPY package.json yarn.lock ./
+#RUN yarn install
 
-# Copy application into container
+# Add source code files to WORKDIR
 COPY . .
 
-# Use the following lines for Rails Apps
-RUN yarn install --check-files && bundle exec rails webpacker:install
-RUN chmod +x ./lib/entrypoint.sh
-ENTRYPOINT ["./lib/entrypoint.sh"]
-CMD ["rails", "server", "-p", "3000", "-b", "0.0.0.0"]
+# Install yarn packages (non-optimized version, remove if you are using optimized version above)
+RUN yarn install
 
-# Use the following line for Non-Rails Apps
+# Application port (optional)
+EXPOSE 3000
+
+# Precompile assets
+RUN RAILS_ENV=production SECRET_KEY_BASE=foo bundle exec rake assets:precompile
+
+# Container start command (for Rails, remove for non-Rails apps)
+CMD ["bundle", "exec", "rails", "server", "-p", "3000", "-b", "0.0.0.0"]
+
+# Use the following line for non-Rails apps
 # CMD ["ruby", "your-app.rb"]

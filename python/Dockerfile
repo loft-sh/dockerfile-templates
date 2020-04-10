@@ -1,18 +1,18 @@
-FROM python:3.7
+FROM python:3.8-slim-buster
 
 # Create project directory (workdir)
-RUN mkdir /app
 WORKDIR /app
 
 # Add requirements.txt to WORKDIR and install dependencies
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-# Add the remaining source code files to WORKDIR
-COPY . .
+# Add source code files to WORKDIR
+ADD . .
 
-ENTRYPOINT ["python"]
+# Application port (optional)
+EXPOSE 8080
 
-# The script to start on startup
-# YOU PROBABLY NEED TO EDIT THE FOLLOWING LINE
-CMD ["app.py"]
+# Container start command
+# It is also possible to override this in devspace.yaml via images.*.cmd
+CMD ["python", "main.py"]

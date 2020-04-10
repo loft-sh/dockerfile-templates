@@ -1,5 +1,0 @@
-.devspace/
-/_base/Dockerfile
-/_base/.dockerignore
-/_base/package.json
-/_base/index.js

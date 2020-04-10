@@ -1,24 +1,36 @@
-FROM php:7.1-apache-stretch
+FROM php:7.4.4-apache
 
 # Set working directory
 WORKDIR /var/www/html
 
-# Install PDO MySQL driver
+# Install PDO MySQL driver (optional)
 RUN docker-php-ext-install pdo_mysql
 
-# Install git, zip and composer + enable Apache modules: rewrite, headers
+# Enable mod rewrite (optional)
+RUN a2enmod rewrite
+
+# Install git, zip and composer (optional)
 RUN apt update \
  && apt install -y git zip \
- && curl --silent --show-error https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
- && a2enmod rewrite headers
+ && curl --silent --show-error https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Copy files to WORKDIR and install dependencies
+# Install composer dependencies (optional)
+COPY composer.* ./
+RUN composer install \
+    --ignore-platform-reqs \
+    --no-interaction \
+    --no-plugins \
+    --no-scripts \
+    --prefer-dist
+
+# Add source code files to WORKDIR
 COPY . .
-RUN composer install
 
-# Set www-data as owner for files
-RUN usermod -u 1000 www-data; \
-    chown -R www-data:www-data /var/www/html
+# Ensure file ownership for source code files
+RUN chown -R www-data:www-data .
 
-# Apache is listening on port 80
+# Application port (optional)
 EXPOSE 80
+
+# Container start command
+CMD ["apache2-foreground"]

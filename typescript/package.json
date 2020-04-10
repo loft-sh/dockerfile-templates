@@ -5,14 +5,15 @@
   "author": "YOUR NAME <you@company>",
   "license": "MIT",
   "scripts": {
-    "start": "node --inspect=0.0.0.0:9229 -r ts-node/register src/index.ts",
-    "start-production": "node dist/index.js",
-    "build": "tsc"
+    "start": "node dist/index.js",
+    "dev": "tsc-watch --onSuccess \"node --inspect=0.0.0.0:9229 dist/index.js\"",
+    "build": "tsc",
+    "postinstall": "tsc"
   },
   "dependencies": {
     "typescript": "3.0.3"
   },
   "devDependencies": {
-    "ts-node": "7.0.1"
+    "tsc-watch": "4.2.3"
   }
 }

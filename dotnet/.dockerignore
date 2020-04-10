@@ -2,3 +2,5 @@ Dockerfile
 
 # Ignore .git folder
 .git
+
+bin/
