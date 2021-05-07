@@ -13,6 +13,6 @@ mvn package -T 1C -U -Dmaven.test.skip=true
 cp target/*.jar target/main.jar
 
 # Start application if `run` argument is passed
-if [ $1 = "run" ]; then
+if [ "$1" = "run" ]; then
   java -jar target/main.jar
 fi
