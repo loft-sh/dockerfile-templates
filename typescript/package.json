@@ -11,7 +11,7 @@
     "postinstall": "tsc"
   },
   "dependencies": {
-    "typescript": "3.0.3"
+    "typescript": "3.9.10"
   },
   "devDependencies": {
     "tsc-watch": "4.2.3"
