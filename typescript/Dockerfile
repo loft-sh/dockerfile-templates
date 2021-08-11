@@ -1,4 +1,4 @@
-FROM node:13.12.0-alpine
+FROM node:13.14-alpine
 
 # Set working directory
 WORKDIR /app
