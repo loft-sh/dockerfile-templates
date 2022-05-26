@@ -1,4 +1,4 @@
-FROM php:7.4.22-apache
+FROM php:7.4.28-apache
 
 # Set working directory
 WORKDIR /var/www/html
